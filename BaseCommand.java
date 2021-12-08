@@ -8,24 +8,16 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class BaseCommand implements CommandExecutor {
 
     private final CommandInfo commandInfo;
 
-    public Hub plugin = Hub.getInstance();
-
-    public ProfileManager profileManager = plugin.getProfileManager();
-    public BungeeManager bungeeManager = plugin.getBungeeManager();
-    public ReplaceManager replaceManager = plugin.getReplaceManager();
-    public ProviderManager providerManager = plugin.getProviderManager();
-    public ServerManager serverManager = plugin.getServerManager();
-    public QueueManager queueManager = plugin.getQueueManager();
-
-    public BaseCommand(){
+    public BaseCommand(JavaPlugin plugin){
         commandInfo = getClass().getDeclaredAnnotation(CommandInfo.class);
 
-        Hub.getInstance().getCommand(commandInfo.name()).setExecutor(this);
+        plugin.getCommand(commandInfo.name()).setExecutor(this);
     }
 
 
